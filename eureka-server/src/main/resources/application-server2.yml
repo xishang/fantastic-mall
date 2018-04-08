@@ -1,0 +1,9 @@
+server:
+  port: 8002
+eureka:
+  instance:
+    hostname: localhost2
+  client:
+    service-url:
+      # 向eureka server1注册自己
+      defaultZone: http://localhost1:8001/eureka

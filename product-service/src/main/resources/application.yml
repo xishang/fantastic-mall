@@ -1,0 +1,12 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: product-service
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+      # 在eureka-server集群中注册服务, 确保高可用
+      # defaultZone: http://localhost1:8001/eureka,http://localhost2:8002/eureka
