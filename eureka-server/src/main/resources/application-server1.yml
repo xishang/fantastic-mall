@@ -1,9 +1,9 @@
 server:
-  port: 8001
+  port: 8000
 eureka:
   instance:
-    hostname: localhost1
+    hostname: 47.98.191.186
   client:
     service-url:
       # 向eureka server2注册自己
-      defaultZone: http://localhost2:8002/eureka
+      defaultZone: http://39.108.9.208:8000/eureka

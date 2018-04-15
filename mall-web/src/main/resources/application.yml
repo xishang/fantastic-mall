@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8088
 
 spring:
   application:
@@ -8,4 +8,7 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka
+feign:
+  hystrix:
+    enabled: true
 

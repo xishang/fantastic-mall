@@ -1,0 +1,15 @@
+server:
+  port: 8100
+
+##  config.server: 两种配置方式
+##  -> 1.git: 使用git配置文件
+##  -> 2.native.search-locations: 使用本地配置文件
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/xishang/config-center
+          search-paths: data
