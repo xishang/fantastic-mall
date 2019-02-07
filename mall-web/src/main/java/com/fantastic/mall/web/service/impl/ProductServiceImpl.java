@@ -16,4 +16,14 @@ public class ProductServiceImpl implements ProductService {
         return "Sorry, service is not available. -- by Feign";
     }
 
+    @Override
+    public String getProduct(Long id) {
+        return null;
+    }
+
+    @Override
+    public String deleteProduct(Long id) {
+        return null;
+    }
+
 }

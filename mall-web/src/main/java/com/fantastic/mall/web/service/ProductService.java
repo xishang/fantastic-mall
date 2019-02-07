@@ -16,4 +16,8 @@ public interface ProductService {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     String getProductList();
 
+    String getProduct(Long id);
+
+    String deleteProduct(Long id);
+
 }

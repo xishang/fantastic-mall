@@ -2,13 +2,13 @@ package com.fantastic.mall.web.controller;
 
 import com.fantastic.mall.web.service.ProductService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheKey;
+import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheRemove;
+import com.netflix.hystrix.contrib.javanica.cache.annotation.CacheResult;
 import com.netflix.ribbon.proxy.annotation.Hystrix;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
@@ -42,6 +42,21 @@ public class MallController {
     @RequestMapping(value = "/products-feign", method = RequestMethod.GET)
     public Object getProductListByFeign() {
         return productService.getProductList();
+    }
+
+    @CacheResult
+    @HystrixCommand(commandKey = "getProductCommand", fallbackMethod = "productsError")
+    @RequestMapping(value = "/products/{id}", method = RequestMethod.GET)
+    public Object getProduct(@CacheKey("id") @PathVariable Long id) {
+        ResponseEntity<String> response = restTemplate.getForEntity("http://product-service/products", String.class);
+        return response.getBody();
+    }
+
+    @CacheRemove(commandKey = "getProductCommand")
+    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
+    public Object deleteProduct(@CacheKey("id") @PathVariable Long id) {
+        ResponseEntity<String> response = restTemplate.getForEntity("http://product-service/products", String.class);
+        return response.getBody();
     }
 
     @Value("${redis.host}")

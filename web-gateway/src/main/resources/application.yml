@@ -7,8 +7,15 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8000/eureka
+# 路由配置方式:
+# 1.直接映射: zuul.routes.<route>.path -> zuul.routes.<route>.url
+# 2.映射serviceId(使用eureka): zuul.routes.<route>.path -> zuul.routes.<route>.serviceId
+# 3.直接指定path: zuul.routes.<serviceId>=<path>
 zuul:
   routes:
     api-mall:
       path: /api-mall/**
       serviceId: mall-web
+    api-product:
+      path: /api-product/**
+      serviceId: product-service

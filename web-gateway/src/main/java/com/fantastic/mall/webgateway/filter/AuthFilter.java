@@ -42,6 +42,11 @@ public class AuthFilter extends ZuulFilter {
         return true;
     }
 
+    /**
+     * 前置过滤: 权限验证
+     *
+     * @return
+     */
     @Override
     public Object run() {
         RequestContext context = RequestContext.getCurrentContext();
